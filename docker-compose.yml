@@ -1,4 +1,5 @@
 # AI Arb Lab - Optional Infrastructure
+# Use: docker compose --profile optional up -d
 # Use profile "optional" to avoid starting by default:
 #   docker compose --profile optional up -d
 #
