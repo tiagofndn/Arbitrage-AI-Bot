@@ -66,3 +66,5 @@ jobs:
 
       - name: Run tests
         run: pytest tests/ -v --tb=short
+        env:
+          PYTHONPATH: .
