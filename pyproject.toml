@@ -60,6 +60,11 @@ Homepage = "https://github.com/your-org/ai-arb-lab"
 Documentation = "https://your-org.github.io/ai-arb-lab"
 Repository = "https://github.com/your-org/ai-arb-lab"
 
+[project.urls]
+Homepage = "https://github.com/your-org/ai-arb-lab"
+Documentation = "https://your-org.github.io/ai-arb-lab"
+Repository = "https://github.com/your-org/ai-arb-lab"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
