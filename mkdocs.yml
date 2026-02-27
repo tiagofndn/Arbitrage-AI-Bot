@@ -1,0 +1,54 @@
+site_name: AI Arb Lab
+site_description: AI-assisted arbitrage research lab (simulated execution, paper trading, reproducible experiments)
+site_url: https://your-org.github.io/ai-arb-lab
+repo_url: https://github.com/your-org/ai-arb-lab
+repo_name: your-org/ai-arb-lab
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - content.code.copy
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - admonition
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Architecture: architecture.md
+  - Configuration: configuration.md
+  - Data Pipeline: data_pipeline.md
+  - Strategies: strategies.md
+  - Risk Management: risk_management.md
+  - Paper Trading: paper_trading.md
+  - Evaluation: evaluation.md
+  - AI Module: ai_module.md
+  - Security & Compliance: security_and_compliance.md
+  - Troubleshooting: troubleshooting.md
