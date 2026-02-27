@@ -267,7 +267,7 @@ A: No. Deterministic fallback rules work without AI. The AI layer is assistive o
 A: Extend `strategies/base.py` and register your strategy. See [docs/strategies.md](docs/strategies.md).
 
 **Q: What about exchange connectors?**  
-A: We provide interfaces and mock implementations. Real connectors must be implemented by users, with full awareness of ToS and rate limits. See [docs/security_and_compliance.md](docs/security_and_compliance.md).
+A: We provide interfaces and mock implementations. Real connectors must be implemented by users, with full awareness of ToS and rate limits. See [docs/security_and_compliance.md](docs/security_and_compliance.md). See [docs/security_and_compliance.md](docs/security_and_compliance.md).
 
 ---
 
