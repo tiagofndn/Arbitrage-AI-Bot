@@ -1,0 +1,74 @@
+# AI Arb Lab - Optional Infrastructure
+# Use profile "optional" to avoid starting by default:
+#   docker compose --profile optional up -d
+#
+# These services are NOT required for core functionality.
+# The lab runs fully with in-memory/synthetic data by default.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    profiles:
+      - optional
+    environment:
+      POSTGRES_DB: ai_arb_lab
+      POSTGRES_USER: arb
+      POSTGRES_PASSWORD: arb_dev_only
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U arb -d ai_arb_lab"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    profiles:
+      - optional
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  prometheus:
+    image: prom/prometheus:latest
+    profiles:
+      - optional
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./scripts/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  grafana:
+    image: grafana/grafana:latest
+    profiles:
+      - optional
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      prometheus:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  grafana_data:
