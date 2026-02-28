@@ -1,4 +1,4 @@
-# AI Arb Lab
+# Arbitrage-AI-Bot
 
 **AI-assisted arbitrage research lab** — Simulated execution, paper trading, reproducible experiments.
 
@@ -55,4 +55,4 @@ ai-arb-lab backtest --data-dir data/sample --output reports/
 
 ## License
 
-MIT. See [LICENSE](https://github.com/your-org/ai-arb-lab/blob/main/LICENSE) in the repository.
+MIT. See [LICENSE](https://github.com/tiagofndn/Arbitrage-AI-Bot/blob/main/LICENSE) in the repository.

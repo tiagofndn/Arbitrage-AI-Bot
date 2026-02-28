@@ -1,9 +1,9 @@
-# ai-arb-lab
+# Arbitrage-AI-Bot
 
 > **AI-assisted arbitrage research lab** — Simulated execution, paper trading, reproducible experiments.
 
-[![CI](https://github.com/your-org/ai-arb-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/ai-arb-lab/actions/workflows/ci.yml)
-[![Docs](https://github.com/your-org/ai-arb-lab/actions/workflows/docs.yml/badge.svg)](https://github.com/your-org/ai-arb-lab/actions/workflows/docs.yml)
+[![CI](https://github.com/tiagofndn/Arbitrage-AI-Bot/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagofndn/Arbitrage-AI-Bot/actions/workflows/ci.yml)
+[![Docs](https://github.com/tiagofndn/Arbitrage-AI-Bot/actions/workflows/docs.yml/badge.svg)](https://github.com/tiagofndn/Arbitrage-AI-Bot/actions/workflows/docs.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -12,7 +12,7 @@
 
 ## Overview
 
-**ai-arb-lab** is an educational, simulation-first framework for researching cross-venue arbitrage. It helps developers learn about market microstructure, latency, slippage, and decision-making—without risking real capital or connecting to live exchanges by default.
+**Arbitrage-AI-Bot** is an educational, simulation-first framework for researching cross-venue arbitrage. It helps developers learn about market microstructure, latency, slippage, and decision-making—without risking real capital or connecting to live exchanges by default.
 
 ### Key Features
 
@@ -100,8 +100,8 @@ flowchart LR
 ### Install
 
 ```bash
-git clone https://github.com/your-org/ai-arb-lab.git
-cd ai-arb-lab
+git clone https://github.com/tiagofndn/Arbitrage-AI-Bot.git
+cd Arbitrage-AI-Bot
 pip install -e ".[dev]"
 cp .env.example .env
 ```
@@ -156,7 +156,7 @@ ai-arb-lab report --input reports/backtest_*.json --output reports/summary.md
 ## Project Structure
 
 ```
-ai-arb-lab/
+Arbitrage-AI-Bot/
 ├── src/ai_arb_lab/          # Main package
 │   ├── core/                # Events, bus, clock
 │   ├── data/                # Loaders, synthetic generator

@@ -28,4 +28,4 @@ If you implement real connectors (outside this repo):
 
 ## Reporting Vulnerabilities
 
-See [SECURITY.md](https://github.com/your-org/ai-arb-lab/blob/main/SECURITY.md) in the repository.
+See [SECURITY.md](https://github.com/tiagofndn/Arbitrage-AI-Bot/blob/main/SECURITY.md) in the repository.

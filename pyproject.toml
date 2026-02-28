@@ -56,14 +56,9 @@ otel = [
 ai-arb-lab = "ai_arb_lab.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/your-org/ai-arb-lab"
-Documentation = "https://your-org.github.io/ai-arb-lab"
-Repository = "https://github.com/your-org/ai-arb-lab"
-
-[project.urls]
-Homepage = "https://github.com/your-org/ai-arb-lab"
-Documentation = "https://your-org.github.io/ai-arb-lab"
-Repository = "https://github.com/your-org/ai-arb-lab"
+Homepage = "https://github.com/tiagofndn/Arbitrage-AI-Bot"
+Documentation = "https://tiagofndn.github.io/Arbitrage-AI-Bot"
+Repository = "https://github.com/tiagofndn/Arbitrage-AI-Bot"
 
 [tool.setuptools.packages.find]
 where = ["src"]

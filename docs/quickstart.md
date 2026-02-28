@@ -10,8 +10,8 @@ Get AI Arb Lab running in under 5 minutes.
 ## Install
 
 ```bash
-git clone https://github.com/your-org/ai-arb-lab.git
-cd ai-arb-lab
+git clone https://github.com/tiagofndn/Arbitrage-AI-Bot.git
+cd Arbitrage-AI-Bot
 pip install -e ".[dev]"
 cp .env.example .env
 ```

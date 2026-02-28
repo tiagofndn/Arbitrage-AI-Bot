@@ -54,5 +54,5 @@ Set `LOG_LEVEL=WARNING` in `.env` to reduce output.
 
 ## Getting Help
 
-- Open an [Issue](https://github.com/your-org/ai-arb-lab/issues)
-- Check [CONTRIBUTING.md](https://github.com/your-org/ai-arb-lab/blob/main/CONTRIBUTING.md)
+- Open an [Issue](https://github.com/tiagofndn/Arbitrage-AI-Bot/issues)
+- Check [CONTRIBUTING.md](https://github.com/tiagofndn/Arbitrage-AI-Bot/blob/main/CONTRIBUTING.md)

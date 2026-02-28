@@ -1,8 +1,8 @@
-site_name: AI Arb Lab
+site_name: Arbitrage-AI-Bot
 site_description: AI-assisted arbitrage research lab (simulated execution, paper trading, reproducible experiments)
-site_url: https://your-org.github.io/ai-arb-lab
-repo_url: https://github.com/your-org/ai-arb-lab
-repo_name: your-org/ai-arb-lab
+site_url: https://tiagofndn.github.io/Arbitrage-AI-Bot
+repo_url: https://github.com/tiagofndn/Arbitrage-AI-Bot
+repo_name: tiagofndn/Arbitrage-AI-Bot
 edit_uri: edit/main/docs/
 
 theme:

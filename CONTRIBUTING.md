@@ -81,6 +81,6 @@ src/ai_arb_lab/
 
 ## Questions?
 
-Open a [Discussion](https://github.com/your-org/ai-arb-lab/discussions) or an [Issue](https://github.com/your-org/ai-arb-lab/issues) for questions.
+Open a [Discussion](https://github.com/tiagofndn/Arbitrage-AI-Bot/discussions) or an [Issue](https://github.com/tiagofndn/Arbitrage-AI-Bot/issues) for questions.
 
 For security concerns, see [SECURITY.md](SECURITY.md).
