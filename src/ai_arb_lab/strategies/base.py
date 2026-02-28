@@ -1,9 +1,9 @@
 """Base strategy interface. All strategies extend this."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Optional
+from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class Signal(BaseModel):
@@ -26,10 +26,10 @@ class BaseStrategy(ABC):
     strategy_id: str = "base"
 
     @abstractmethod
-    def evaluate(self, market_data: dict[str, Any]) -> Optional[Signal]:
+    def evaluate(self, market_data: dict[str, Any]) -> Signal | None:
         """Evaluate market data and return a signal if opportunity exists."""
         ...
 
     def reset(self) -> None:
-        """Reset strategy state for new backtest run."""
+        """Reset strategy state for new backtest run. Override in subclasses if needed."""
         pass

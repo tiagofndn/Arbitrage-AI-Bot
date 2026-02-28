@@ -3,7 +3,6 @@
 from datetime import datetime
 
 import pandas as pd
-import pytest
 
 from ai_arb_lab.data.synthetic import SyntheticMarketGenerator
 

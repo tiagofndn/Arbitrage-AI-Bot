@@ -4,7 +4,7 @@ Detects cross-venue price discrepancies when spread (after fees/slippage)
 exceeds a threshold. Used for simulation and education.
 """
 
-from typing import Any, Optional
+from typing import Any
 
 import pandas as pd
 
@@ -26,7 +26,7 @@ class SimpleSpreadStrategy(BaseStrategy):
         self.fee_rate = fee_rate
         self.slippage_bps = slippage_bps / 10000.0
 
-    def evaluate(self, market_data: dict[str, Any]) -> Optional[Signal]:
+    def evaluate(self, market_data: dict[str, Any]) -> Signal | None:
         """Check for cross-venue arbitrage opportunity.
 
         Compares best bid/ask across venues and emits signal if net spread

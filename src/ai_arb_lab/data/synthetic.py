@@ -7,9 +7,9 @@ volatility, spreads, and depth. No real exchange connection required.
 import logging
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 
 logger = logging.getLogger(__name__)
@@ -42,23 +42,22 @@ class SyntheticMarketGenerator:
     ) -> pd.DataFrame:
         """Generate synthetic trade data for all venues."""
         n_trades = days * 24 * 60 * trades_per_minute
-        timestamps = [
-            start + timedelta(minutes=i / trades_per_minute)
-            for i in range(n_trades)
-        ]
+        timestamps = [start + timedelta(minutes=i / trades_per_minute) for i in range(n_trades)]
         prices = self._random_walk(n_trades)
         sizes = self._rng.lognormal(0, 1, n_trades).clip(0.001, 10.0)
         sides = self._rng.choice(["buy", "sell"], n_trades)
         venues = [f"venue_{i % self.n_venues}" for i in range(n_trades)]
 
-        return pd.DataFrame({
-            "timestamp": timestamps,
-            "venue": venues,
-            "symbol": symbol,
-            "price": prices,
-            "size": sizes,
-            "side": sides,
-        })
+        return pd.DataFrame(
+            {
+                "timestamp": timestamps,
+                "venue": venues,
+                "symbol": symbol,
+                "price": prices,
+                "size": sizes,
+                "side": sides,
+            }
+        )
 
     def generate_orderbook(
         self,
@@ -70,8 +69,7 @@ class SyntheticMarketGenerator:
         """Generate synthetic orderbook snapshots."""
         n_snapshots = days * 24 * 60 * snapshots_per_minute
         timestamps = [
-            start + timedelta(minutes=i / snapshots_per_minute)
-            for i in range(n_snapshots)
+            start + timedelta(minutes=i / snapshots_per_minute) for i in range(n_snapshots)
         ]
         prices = self._random_walk(n_snapshots)
         spread = prices * self.spread_bps
@@ -81,15 +79,17 @@ class SyntheticMarketGenerator:
         ask_sizes = self._rng.uniform(1, 100, n_snapshots)
         venues = [f"venue_{i % self.n_venues}" for i in range(n_snapshots)]
 
-        return pd.DataFrame({
-            "timestamp": timestamps,
-            "venue": venues,
-            "symbol": symbol,
-            "bid_price": bid_prices,
-            "ask_price": ask_prices,
-            "bid_size": bid_sizes,
-            "ask_size": ask_sizes,
-        })
+        return pd.DataFrame(
+            {
+                "timestamp": timestamps,
+                "venue": venues,
+                "symbol": symbol,
+                "bid_price": bid_prices,
+                "ask_price": ask_prices,
+                "bid_size": bid_sizes,
+                "ask_size": ask_sizes,
+            }
+        )
 
     def generate_candles(
         self,
@@ -100,28 +100,27 @@ class SyntheticMarketGenerator:
     ) -> pd.DataFrame:
         """Generate OHLCV candles."""
         n_candles = (days * 24 * 60) // interval_minutes
-        timestamps = [
-            start + timedelta(minutes=i * interval_minutes)
-            for i in range(n_candles)
-        ]
+        timestamps = [start + timedelta(minutes=i * interval_minutes) for i in range(n_candles)]
         prices = self._random_walk(n_candles)
         high = prices * (1 + self._rng.uniform(0, self.volatility, n_candles))
         low = prices * (1 - self._rng.uniform(0, self.volatility, n_candles))
         volume = self._rng.lognormal(5, 2, n_candles)
         venues = [f"venue_{i % self.n_venues}" for i in range(n_candles)]
 
-        return pd.DataFrame({
-            "timestamp": timestamps,
-            "venue": venues,
-            "symbol": symbol,
-            "open": prices,
-            "high": high,
-            "low": low,
-            "close": prices,
-            "volume": volume,
-        })
+        return pd.DataFrame(
+            {
+                "timestamp": timestamps,
+                "venue": venues,
+                "symbol": symbol,
+                "open": prices,
+                "high": high,
+                "low": low,
+                "close": prices,
+                "volume": volume,
+            }
+        )
 
-    def _random_walk(self, n: int) -> np.ndarray:
+    def _random_walk(self, n: int) -> npt.NDArray[np.floating]:
         """Generate price series with random walk."""
         returns = self._rng.normal(0, self.volatility, n)
         prices = self.base_price * np.cumprod(1 + returns)
@@ -130,7 +129,7 @@ class SyntheticMarketGenerator:
     def generate_all(
         self,
         output_dir: Path | str,
-        start: Optional[datetime] = None,
+        start: datetime | None = None,
         days: int = 1,
         symbol: str = "BTC-USD",
     ) -> dict[str, Path]:

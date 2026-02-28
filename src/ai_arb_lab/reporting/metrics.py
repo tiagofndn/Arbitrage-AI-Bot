@@ -1,7 +1,6 @@
 """Backtest metrics computation."""
 
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -15,9 +14,9 @@ class BacktestMetrics:
     trade_count: int
     win_count: int
     max_drawdown_pct: float
-    sharpe_ratio: Optional[float] = None
+    sharpe_ratio: float | None = None
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, float | int | None]:
         """Export as dict for JSON serialization."""
         return {
             "initial_capital": self.initial_capital,
@@ -37,12 +36,11 @@ class BacktestMetrics:
         final_capital: float,
         trade_count: int,
         win_count: int,
-        returns: Optional[list[float]] = None,
+        returns: list[float] | None = None,
     ) -> "BacktestMetrics":
         """Compute metrics from backtest results."""
         total_return = final_capital - initial_capital
         total_return_pct = total_return / initial_capital if initial_capital else 0
-        win_rate = win_count / trade_count if trade_count else 0
 
         # Simplified max drawdown (would need equity curve for accurate)
         max_dd = abs(min(0, total_return_pct))
@@ -50,9 +48,10 @@ class BacktestMetrics:
         sharpe = None
         if returns and len(returns) > 1:
             import numpy as np
+
             arr = np.array(returns)
             if arr.std() > 0:
-                sharpe = float(arr.mean() / arr.std() * (252 ** 0.5))  # Annualized
+                sharpe = float(arr.mean() / arr.std() * (252**0.5))  # Annualized
 
         return cls(
             initial_capital=initial_capital,

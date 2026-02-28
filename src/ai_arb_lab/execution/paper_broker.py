@@ -1,11 +1,9 @@
 """Paper broker: simulate order execution without real exchange connection."""
 
-import uuid
 import logging
-from typing import Optional
 
-from ai_arb_lab.core.events import OrderEvent, FillEvent
 from ai_arb_lab.core.clock import SimClock
+from ai_arb_lab.core.events import FillEvent, OrderEvent
 from ai_arb_lab.execution.fill_model import FillModel
 from ai_arb_lab.strategies.base import Signal
 
@@ -18,7 +16,7 @@ class PaperBroker:
     def __init__(
         self,
         initial_capital: float = 100_000.0,
-        fill_model: Optional[FillModel] = None,
+        fill_model: FillModel | None = None,
     ) -> None:
         self.initial_capital = initial_capital
         self.capital = initial_capital
@@ -34,7 +32,7 @@ class PaperBroker:
         self,
         signal: Signal,
         clock: SimClock,
-    ) -> tuple[Optional[OrderEvent], Optional[FillEvent]]:
+    ) -> tuple[OrderEvent | None, FillEvent | None]:
         """Submit buy order on venue_buy, then sell on venue_sell. Returns order and fill events."""
         order_id = self._next_order_id()
 
@@ -64,15 +62,6 @@ class PaperBroker:
 
         # Sell leg (simplified: assume we can sell immediately)
         sell_order_id = self._next_order_id()
-        sell_order = OrderEvent(
-            order_id=sell_order_id,
-            symbol=signal.symbol,
-            side="sell",
-            venue=signal.venue_sell,
-            price=signal.price_sell,
-            size=signal.size,
-            timestamp=clock.now(),
-        )
         sell_fill = self.fill_model.simulate_fill(
             order_id=sell_order_id,
             symbol=signal.symbol,

@@ -11,9 +11,6 @@ from ai_arb_lab import __version__
 from ai_arb_lab.config import (
     BACKTEST_INITIAL_CAPITAL,
     DATA_DIR,
-    SYNTHETIC_DAYS,
-    SYNTHETIC_SEED,
-    SYNTHETIC_VENUES,
 )
 from ai_arb_lab.data.loader import load_data_dir
 from ai_arb_lab.data.synthetic import SyntheticMarketGenerator
@@ -76,6 +73,7 @@ def _run_backtest_engine(
             continue
 
         from ai_arb_lab.core.clock import SimClock
+
         clock = SimClock()
         clock.start(datetime.fromisoformat(str(minute)))
         _, fill = broker.submit_order(signal, clock)
@@ -135,7 +133,9 @@ def backtest(
     """Run backtest on data directory."""
     data_dir = data_dir or DATA_DIR
     metrics = _run_backtest_engine(data_dir, output, initial_capital)
-    typer.echo(f"Backtest complete. Return: {metrics.total_return_pct:.2%}, Trades: {metrics.trade_count}")
+    typer.echo(
+        f"Backtest complete. Return: {metrics.total_return_pct:.2%}, Trades: {metrics.trade_count}"
+    )
     typer.echo(f"Report saved to {output / 'backtest_report.md'}")
 
 
@@ -165,7 +165,9 @@ def paper_run(
 
 @app.command()
 def report(
-    input_path: str = typer.Argument(..., help="Path to metrics JSON (e.g. reports/backtest_metrics.json)"),
+    input_path: str = typer.Argument(
+        ..., help="Path to metrics JSON (e.g. reports/backtest_metrics.json)"
+    ),
     output: Path = typer.Option("./reports/summary.md", "--output", "-o", path_type=Path),
 ) -> None:
     """Generate report from backtest metrics JSON."""

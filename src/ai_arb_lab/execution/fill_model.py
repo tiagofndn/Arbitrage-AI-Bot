@@ -2,10 +2,9 @@
 
 import uuid
 from dataclasses import dataclass
-from typing import Optional
 
-from ai_arb_lab.core.events import FillEvent
 from ai_arb_lab.core.clock import SimClock
+from ai_arb_lab.core.events import FillEvent
 
 
 @dataclass
@@ -41,10 +40,11 @@ class FillModel:
         price: float,
         size: float,
         clock: SimClock,
-        fill_prob_override: Optional[float] = None,
-    ) -> Optional[FillEvent]:
+        fill_prob_override: float | None = None,
+    ) -> FillEvent | None:
         """Simulate a fill. Returns FillEvent or None if not filled."""
         import random
+
         prob = fill_prob_override if fill_prob_override is not None else self.fill_probability
         if random.random() > prob:
             return None

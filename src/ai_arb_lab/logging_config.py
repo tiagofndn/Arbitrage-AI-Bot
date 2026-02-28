@@ -3,7 +3,7 @@
 import logging
 import sys
 
-from ai_arb_lab.config import LOG_LEVEL, LOG_FORMAT
+from ai_arb_lab.config import LOG_FORMAT, LOG_LEVEL
 
 
 def setup_logging() -> None:
@@ -11,6 +11,7 @@ def setup_logging() -> None:
     level = getattr(logging, LOG_LEVEL.upper(), logging.INFO)
     try:
         import structlog
+
         structlog.configure(
             processors=[
                 structlog.stdlib.filter_by_level,
@@ -20,7 +21,11 @@ def setup_logging() -> None:
                 structlog.processors.StackInfoRenderer(),
                 structlog.processors.format_exc_info,
                 structlog.processors.UnicodeDecoder(),
-                structlog.dev.ConsoleRenderer() if LOG_FORMAT == "console" else structlog.processors.JSONRenderer(),
+                (
+                    structlog.dev.ConsoleRenderer()
+                    if LOG_FORMAT == "console"
+                    else structlog.processors.JSONRenderer()
+                ),
             ],
             wrapper_class=structlog.stdlib.BoundLogger,
             context_class=dict,

@@ -6,7 +6,6 @@ when AI is disabled.
 """
 
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -28,7 +27,7 @@ class PolicyModule:
 
     def suggest_min_spread(
         self,
-        historical_spreads: Optional[list[float]] = None,
+        historical_spreads: list[float] | None = None,
     ) -> PolicySuggestion:
         """Suggest min_spread_bps. Uses historical data if provided and enabled."""
         if not self.enabled or not historical_spreads:
@@ -42,7 +41,9 @@ class PolicyModule:
         # Simple heuristic: use 75th percentile of historical spreads as threshold
         sorted_spreads = sorted(historical_spreads)
         idx = int(len(sorted_spreads) * 0.75)
-        suggested = sorted_spreads[idx] if idx < len(sorted_spreads) else self.default_min_spread_bps
+        suggested = (
+            sorted_spreads[idx] if idx < len(sorted_spreads) else self.default_min_spread_bps
+        )
 
         return PolicySuggestion(
             parameter="min_spread_bps",

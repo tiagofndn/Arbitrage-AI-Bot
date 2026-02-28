@@ -3,9 +3,7 @@
 from pathlib import Path
 
 from ai_arb_lab.config import DATA_DIR
-from ai_arb_lab.data.loader import load_data_dir
 from ai_arb_lab.data.synthetic import SyntheticMarketGenerator
-from ai_arb_lab.strategies.simple_spread import SimpleSpreadStrategy
 
 
 def main() -> None:
@@ -18,6 +16,7 @@ def main() -> None:
 
     # Run via CLI
     import subprocess
+
     result = subprocess.run(
         ["ai-arb-lab", "paper-run", "--data-dir", str(data_dir), "--duration", "60"],
         capture_output=True,

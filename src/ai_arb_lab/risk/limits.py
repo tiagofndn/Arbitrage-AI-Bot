@@ -4,7 +4,6 @@ All signals must pass these checks before simulated execution.
 """
 
 from dataclasses import dataclass
-from typing import Optional
 
 from ai_arb_lab.strategies.base import Signal
 
@@ -36,7 +35,10 @@ class RiskLimits:
             return False, f"Drawdown {drawdown:.1%} exceeds max {self.max_drawdown_pct:.1%}"
 
         if self._daily_pnl < -self.max_daily_loss:
-            return False, f"Daily loss {abs(self._daily_pnl):.0f} exceeds max {self.max_daily_loss:.0f}"
+            return (
+                False,
+                f"Daily loss {abs(self._daily_pnl):.0f} exceeds max {self.max_daily_loss:.0f}",
+            )
 
         return True, "OK"
 

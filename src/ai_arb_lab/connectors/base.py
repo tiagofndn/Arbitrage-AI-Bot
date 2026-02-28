@@ -1,7 +1,7 @@
 """Base connector interface. Real implementations are out of scope."""
 
 from abc import ABC, abstractmethod
-from typing import Any, AsyncIterator
+from collections.abc import AsyncIterator
 
 from ai_arb_lab.core.events import Event
 

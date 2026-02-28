@@ -1,7 +1,6 @@
 """Report rendering: Markdown and HTML."""
 
 from pathlib import Path
-from typing import Any
 
 from ai_arb_lab.reporting.metrics import BacktestMetrics
 

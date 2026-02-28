@@ -1,6 +1,6 @@
 """Mock market data connector for simulation. No real exchange connection."""
 
-from typing import AsyncIterator
+from collections.abc import AsyncIterator
 
 from ai_arb_lab.connectors.base import MarketDataConnector
 from ai_arb_lab.core.events import Event
@@ -17,7 +17,7 @@ class MockMarketDataConnector(MarketDataConnector):
         """No-op."""
         pass
 
-    async def stream_events(self) -> AsyncIterator[Event]:
+    async def stream_events(self) -> AsyncIterator[Event]:  # type: ignore[override]
         """Yield no events. Override in tests to inject mock data."""
         if False:
             yield  # Makes this an async generator; never reached

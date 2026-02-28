@@ -1,7 +1,8 @@
 """Pytest fixtures."""
 
-import pytest
 from pathlib import Path
+
+import pytest
 
 from ai_arb_lab.data.synthetic import SyntheticMarketGenerator
 

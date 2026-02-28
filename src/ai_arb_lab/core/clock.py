@@ -5,7 +5,6 @@ for faster backtesting. All components use this clock for consistency.
 """
 
 from datetime import datetime, timedelta
-from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -15,18 +14,16 @@ class SimClock(BaseModel):
 
     current_time: datetime = Field(default_factory=datetime.utcnow)
     speed_multiplier: float = 1.0  # 1.0 = real-time, 10.0 = 10x faster
-    initial_time: Optional[datetime] = None
+    initial_time: datetime | None = None
 
-    def start(self, start_time: Optional[datetime] = None) -> None:
+    def start(self, start_time: datetime | None = None) -> None:
         """Start the clock. Optionally set initial time for replay."""
         self.initial_time = start_time or datetime.utcnow()
         self.current_time = self.initial_time
 
     def advance(self, delta: timedelta) -> datetime:
         """Advance clock by delta (scaled by speed_multiplier)."""
-        scaled = timedelta(
-            seconds=delta.total_seconds() * self.speed_multiplier
-        )
+        scaled = timedelta(seconds=delta.total_seconds() * self.speed_multiplier)
         self.current_time = self.current_time + scaled
         return self.current_time
 
